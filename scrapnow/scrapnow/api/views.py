@@ -9,7 +9,8 @@ from .schema import (
     ArticleFindNewRequest,
     ApiResponse,
     ScrapperAddTaskRequest,
-    ArticleRetrieveResponse
+    ArticleRetrieveRequest,
+    ArticleRetrieveResponse,
 )
 from ..lib.http import HTTPView
 
@@ -64,7 +65,7 @@ class ArticleFindNewView(BaseApiView):
 
 class ArticleRetrieveView(BaseApiView):
 
-    @querystring_schema(ArticleRetrieveResponse)
+    @querystring_schema(ArticleRetrieveRequest)
     @response_schema(ArticleRetrieveResponse)
     async def get(self):
         datetime = self.request['querystring']['date']
