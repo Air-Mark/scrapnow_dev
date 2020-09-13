@@ -1,0 +1,46 @@
+version: '3'
+services:
+
+  api:
+    restart: unless-stopped
+    build:
+      context: ./
+    working_dir: /opt/scrapnow
+    command: |
+      sh -c "
+      while ! timeout 1 bash -c 'cat < /dev/null > /dev/tcp/db/5432'; do sleep 1; done
+      scrapnow_runner scrapnow.api.service -c "/opt/conf/scrapnow.yml"
+      sleep infinity"
+    volumes:
+        - ./conf:/opt/conf
+    ports:
+      - "0.0.0.0:81:81"
+
+  scrapper:
+    restart: unless-stopped
+    build:
+      context: ./
+    working_dir: /opt/scrapnow
+    command: |
+      sh -c "
+      while ! timeout 1 bash -c 'cat < /dev/null > /dev/tcp/db/5432'; do sleep 1; done
+      scrapnow_runner scrapnow.scrapper.service -c "/opt/conf/scrapnow.yml"
+      sleep infinity"
+    volumes:
+        - ./conf:/opt/conf
+
+  db:
+    restart: unless-stopped
+    build: ./pg
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+
+  cron:
+    restart: unless-stopped
+    build: ./cron
+    environment:
+      CURL_URL: "http://scrapnow_api:81/scrapper/add_task"
+      CURL_JSON: "{ \"url\": \"https://www.reuters.com/news/archive/rates-rss\", \"handler\": \"reuters_article\"}"
+      CRON_SCHEDULE: "0 * * * *"

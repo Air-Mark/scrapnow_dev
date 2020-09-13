@@ -1,0 +1,34 @@
+service_name: 'scrapnow_service'
+
+scrapnow_db:
+  dsn: postgresql://scrapnow:scrapnow@db:5432/scrapnow
+  min_size: 10
+  max_size: 10
+
+scrapnow_listener:
+  dsn: postgresql://scrapnow:scrapnow@db:5432/scrapnow
+
+web_server:
+  url: http://0.0.0.0:81
+
+routes:
+  -
+
+logging:
+    version: 1
+    disable_existing_loggers: False
+    formatters:
+        default:
+            format: "%(asctime)s %(levelname)-8s %(process)d [%(name)s] [%(funcName)s] %(message)s"
+    handlers:
+        default:
+            level: DEBUG
+            class: logging.StreamHandler
+            formatter: default
+    root:
+        level: DEBUG
+        handlers: [default]
+    loggers:
+        zapier:
+            handlers: [default]
+            propagate: False
