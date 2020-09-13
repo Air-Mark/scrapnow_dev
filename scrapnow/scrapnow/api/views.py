@@ -6,7 +6,6 @@ from aiohttp_apispec import (
 )
 
 from .schema import (
-    ArticleFindNewRequest,
     ApiResponse,
     ScrapperAddTaskRequest,
     ArticleRetrieveRequest,
@@ -52,14 +51,6 @@ class ScrapperAddTaskView(BaseApiView):
             self.document_fields,
             self.handler
         )
-        return {}
-
-
-class ArticleFindNewView(BaseApiView):
-
-    @querystring_schema(ArticleFindNewRequest)
-    @response_schema(ApiResponse)
-    async def get(self):
         return {}
 
 

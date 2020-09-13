@@ -20,11 +20,6 @@ class ScrapperAddTaskRequest(Schema):
     ))
 
 
-class ArticleFindNewRequest(Schema):
-    url = fields.Url(required=True)
-    document_fields = fields.List(fields.Nested(DocumentField()))
-
-
 class ArticleRetrieveRequest(Schema):
     date = fields.DateTime(required=True)
 

@@ -41,6 +41,6 @@ services:
     restart: unless-stopped
     build: ./cron
     environment:
-      CURL_URL: "http://scrapnow_api:81/scrapper/add_task"
+      CURL_URL: "http://api:81/scrapper/add_task"
       CURL_JSON: "{ \"url\": \"https://www.reuters.com/news/archive/rates-rss\", \"handler\": \"reuters_article\"}"
       CRON_SCHEDULE: "0 * * * *"

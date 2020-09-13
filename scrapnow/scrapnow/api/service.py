@@ -10,7 +10,6 @@ from ..lib.service import Service as BaseService
 class Routes(BaseRoutes):
     _routes = [
         ('*', '/scrapper/add_task', ScrapperAddTaskView),
-        ('*', '/article/find_new', ScrapperAddTaskView),
         ('*', '/article/retrieve', ArticleRetrieveView)
     ]
 
