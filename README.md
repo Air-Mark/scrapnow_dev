@@ -27,9 +27,13 @@ There are two main methods
 url `https://www.reuters.com/news/archive/rates-rss` 
 with the specified handler (there is only one for now `reuters_article`)
 ```
--X POST "http://scrapnow_main:81/scrapper/add_task" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"url\": \"https://www.reuters.com/news/archive/rates-rss\", \"handler\": \"reuters_article\"}"
+curl -X POST "http://0.0.0.0:81/scrapper/add_task" \
+-H "accept: application/json" \
+-H "Content-Type: application/json" \
+-d "{ \"url\": \"https://www.reuters.com/news/archive/rates-rss\", \"handler\": \"reuters_article\"}"
 ```
 - **/article/retrieve** - it return articles from db for the specified date in iso format.
 ```
-curl -X GET "http://0.0.0.0:81/article/retrieve?date=2020-09-11T00%3A00%3A00.000Z" -H "accept: application/json"
+curl -X GET "http://0.0.0.0:81/article/retrieve?date=2020-09-11T00%3A00%3A00.000Z" \
+-H "accept: application/json"
 ```
