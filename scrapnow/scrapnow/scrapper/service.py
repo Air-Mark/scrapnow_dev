@@ -61,7 +61,7 @@ class Service(BaseService):
 
                 task_handler = self.handler_factory(task, html_dom)
                 if task_handler:
-                    await task_handler.process_task()
+                    await task_handler.run()
 
         except Exception as exp:
             self.log.exception('Scrap task failed')

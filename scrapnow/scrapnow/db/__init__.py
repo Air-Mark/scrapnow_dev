@@ -91,7 +91,7 @@ class ScrapnowDatabase(Component, PG):
         if values.get('error'):
             status = TaskStatus.ERROR.value
         else:
-            status = TaskStatus.ERROR.value
+            status = TaskStatus.DONE.value
 
         await self.fetchrow(scrap_task.update().values(
             status=status,
